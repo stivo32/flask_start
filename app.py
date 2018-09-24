@@ -16,12 +16,6 @@ app.secret_key = 'somecode'
 api = Api(app)
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
-
-@app.before_first_request
-def create_tables():  # create db with tables before first request
-    db.create_all()
-
-
 jwt = JWT(app, authenticate, identity)  # create /auth
 
 api.add_resource(ItemList, '/items')
